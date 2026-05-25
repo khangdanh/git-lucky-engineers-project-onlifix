@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Nhận Báo Giá - OnliFix</title>
+    <meta name="description" content="Xem chi tiết báo giá sửa chữa từ kỹ thuật viên OnliFix. Minh bạch, rõ ràng từng hạng mục.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/quote.css">
+    <link rel="icon" href="../img/logo.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container nav-container">
+            <a href="webpage.html" class="logo">
+                <img src="../img/logo.png" alt="OnliFix" style="height: 40px;"> OnliFix
+            </a>
+
+            <button class="mobile-nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="main-nav" class="nav-links" role="navigation" aria-label="Menu chính">
+                <a href="webpage.html">Trang chủ</a>
+                <a href="search-results.html">Tìm thợ</a>
+                <a href="booking.html"><i class="fa-solid fa-calendar-check"></i> Đặt lịch</a>
+                <a href="map.html"><i class="fa-solid fa-map-location-dot"></i> Bản đồ</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="customer-dashboard.html" class="btn btn-outline"><i class="fa-solid fa-user"></i> Tài khoản</a>
+                <a href="login.html" class="btn btn-primary">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="quote-hero">
+        <div class="container">
+            <div class="quote-hero-content">
+                <div class="quote-hero-info">
+                    <div class="quote-badge"><i class="fa-solid fa-file-invoice-dollar"></i> Báo giá chi tiết</div>
+                    <h1>Xác Nhận Báo Giá Sửa Chữa</h1>
+                    <p>Vui lòng xem xét kỹ báo giá bên dưới. Mọi chi phí đã được kỹ thuật viên liệt kê minh bạch.</p>
+                </div>
+                <div class="quote-order-id">
+                    <span class="order-label">Mã đơn hàng</span>
+                    <span class="order-code">#OLF-2026-0429</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="quote-main container" role="main">
+
+        <!-- PART 1: DEVICE ISSUE SUMMARY -->
+        <section class="quote-section issue-summary">
+            <div class="section-header">
+                <div class="section-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                <div>
+                    <h2>Thông Tin Thiết Bị & Tình Trạng Hư Hỏng</h2>
+                    <p>Kết quả khảo sát tại nhà bởi kỹ thuật viên</p>
+                </div>
+            </div>
+
+            <div class="issue-grid">
+                <!-- Device Image -->
+                <div class="issue-image-wrapper">
+                    <img src="../img/broken_laptop.png" alt="Laptop bị hỏng màn hình" class="issue-image" id="device-image">
+                    <div class="image-badge">
+                        <i class="fa-solid fa-camera"></i> Ảnh chụp bởi thợ
+                    </div>
+                </div>
+
+                <!-- Device Info -->
+                <div class="issue-details">
+                    <div class="device-info-card">
+                        <h3><i class="fa-solid fa-laptop"></i> Thông tin thiết bị</h3>
+                        <div class="info-row">
+                            <span class="info-label">Loại thiết bị</span>
+                            <span class="info-value">Laptop</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hãng / Model</span>
+                            <span class="info-value">ASUS VivoBook 15 (X515EA)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Số seri</span>
+                            <span class="info-value">M4NRKD02****</span>
+                        </div>
+                    </div>
+
+                    <div class="damage-report">
+                        <h3><i class="fa-solid fa-triangle-exclamation"></i> Báo cáo hư hỏng từ thợ</h3>
+                        <div class="tech-note">
+                            <div class="tech-avatar-sm">ĐK</div>
+                            <div class="tech-note-content">
+                                <div class="tech-name">Đặng Anh Khoa <i class="fa-solid fa-circle-check" style="color: var(--primary-color); font-size: 12px;"></i></div>
+                                <p>Sau khi khảo sát, em phát hiện <strong>màn hình LCD bị nứt vỡ</strong> do va đập mạnh, gây ra hiện tượng chảy mực và không hiển thị hình ảnh ở 1/3 màn hình bên phải. <strong>Cáp flat kết nối màn hình cũng bị đứt 2 sợi</strong>, cần thay thế đồng bộ. Mainboard và ổ cứng hoạt động bình thường, dữ liệu không bị ảnh hưởng.</p>
+                            </div>
+                        </div>
+                        <div class="damage-tags">
+                            <span class="damage-tag critical"><i class="fa-solid fa-circle-xmark"></i> Màn hình LCD — Nứt vỡ</span>
+                            <span class="damage-tag warning"><i class="fa-solid fa-circle-exclamation"></i> Cáp flat — Đứt</span>
+                            <span class="damage-tag ok"><i class="fa-solid fa-circle-check"></i> Mainboard — Bình thường</span>
+                            <span class="damage-tag ok"><i class="fa-solid fa-circle-check"></i> Ổ cứng / Dữ liệu — An toàn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 2: QUOTATION TABLE -->
+        <section class="quote-section quotation-table-section">
+            <div class="section-header">
+                <div class="section-icon"><i class="fa-solid fa-receipt"></i></div>
+                <div>
+                    <h2>Bảng Báo Giá Chi Tiết</h2>
+                    <p>Tất cả chi phí đã bao gồm thuế VAT 10%</p>
+                </div>
+            </div>
+
+            <div class="invoice-card">
+                <!-- Invoice Header -->
+                <div class="invoice-header">
+                    <div class="invoice-from">
+                        <div class="invoice-logo">
+                            <img src="../img/logo.png" alt="OnliFix" style="height: 28px;"> OnliFix
+                        </div>
+                        <p>Nền tảng sửa chữa điện tử O2O</p>
+                    </div>
+                    <div class="invoice-meta">
+                        <div class="invoice-meta-row">
+                            <span>Ngày báo giá:</span>
+                            <strong id="quote-date">29/04/2026</strong>
+                        </div>
+                        <div class="invoice-meta-row">
+                            <span>Hiệu lực đến:</span>
+                            <strong>06/05/2026</strong>
+                        </div>
+                        <div class="invoice-meta-row">
+                            <span>KTV phụ trách:</span>
+                            <strong>Đặng Anh Khoa</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote Table -->
+                <div class="table-wrapper">
+                    <table class="quote-table" id="quote-table">
+                        <thead>
+                            <tr>
+                                <th class="col-stt">#</th>
+                                <th class="col-item">Hạng mục</th>
+                                <th class="col-desc">Mô tả chi tiết</th>
+                                <th class="col-qty">SL</th>
+                                <th class="col-price">Đơn giá</th>
+                                <th class="col-total">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong>Phí khảo sát tận nơi</strong></td>
+                                <td>Di chuyển đến nhà khách hàng, kiểm tra và chẩn đoán lỗi thiết bị</td>
+                                <td>1</td>
+                                <td>50.000 ₫</td>
+                                <td class="cell-total">50.000 ₫</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong>Màn hình LCD 15.6" FHD</strong></td>
+                                <td>Thay thế panel LCD mới chính hãng BOE NV156FHM, tương thích ASUS X515</td>
+                                <td>1</td>
+                                <td>1.250.000 ₫</td>
+                                <td class="cell-total">1.250.000 ₫</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><strong>Cáp flat màn hình</strong></td>
+                                <td>Cáp kết nối LCD-Mainboard, mã tương thích DD0XKBLC010</td>
+                                <td>1</td>
+                                <td>180.000 ₫</td>
+                                <td class="cell-total">180.000 ₫</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><strong>Công thợ lắp đặt</strong></td>
+                                <td>Tháo lắp, thay thế linh kiện, kiểm tra vận hành tại chỗ</td>
+                                <td>1</td>
+                                <td>200.000 ₫</td>
+                                <td class="cell-total">200.000 ₫</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Totals -->
+                <div class="invoice-totals">
+                    <div class="totals-row">
+                        <span>Tạm tính</span>
+                        <span>1.680.000 ₫</span>
+                    </div>
+                    <div class="totals-row">
+                        <span>Thuế VAT (10%)</span>
+                        <span>168.000 ₫</span>
+                    </div>
+                    <div class="totals-row discount">
+                        <span><i class="fa-solid fa-tag"></i> Giảm giá khách mới (-5%)</span>
+                        <span>-84.000 ₫</span>
+                    </div>
+                    <div class="totals-row grand-total">
+                        <span>Tổng thanh toán</span>
+                        <span id="grand-total">1.764.000 ₫</span>
+                    </div>
+                </div>
+
+                <!-- Warranty Info -->
+                <div class="warranty-info">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div>
+                        <strong>Bảo hành 6 tháng</strong> cho tất cả linh kiện thay thế. Phiếu bảo hành điện tử sẽ được gửi qua ứng dụng OnliFix sau khi hoàn tất sửa chữa.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 3: ACTIONS -->
+        <section class="quote-actions">
+            <div class="actions-card">
+                <div class="actions-info">
+                    <h3>Bạn có đồng ý với báo giá này không?</h3>
+                    <p>Sau khi duyệt, thợ sẽ bắt đầu sửa chữa ngay tại nhà bạn. Thanh toán sau khi hoàn tất.</p>
+                </div>
+                <div class="actions-buttons">
+                    <button class="btn-approve" id="btn-approve">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Đồng ý sửa chữa
+                        <span class="btn-sublabel">Thanh toán: 1.764.000 ₫</span>
+                    </button>
+                    <button class="btn-reject" id="btn-reject">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                        Từ chối — Chỉ trả phí khảo sát
+                        <span class="btn-sublabel">Thanh toán: 50.000 ₫</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-card" id="modal-card">
+            <div class="modal-icon success">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2>Đã duyệt báo giá thành công!</h2>
+            <p class="modal-subtitle">Thợ Đặng Anh Khoa đang bắt đầu sửa chữa thiết bị của bạn.</p>
+
+            <div class="modal-status-tracker">
+                <div class="status-step completed">
+                    <div class="status-dot"><i class="fa-solid fa-check"></i></div>
+                    <div class="status-info">
+                        <strong>Đã tiếp nhận</strong>
+                        <span>Đơn hàng #OLF-2026-0429</span>
+                    </div>
+                </div>
+                <div class="status-step completed">
+                    <div class="status-dot"><i class="fa-solid fa-check"></i></div>
+                    <div class="status-info">
+                        <strong>Đã khảo sát</strong>
+                        <span>Xác nhận hư hỏng & báo giá</span>
+                    </div>
+                </div>
+                <div class="status-step active">
+                    <div class="status-dot"><i class="fa-solid fa-wrench"></i></div>
+                    <div class="status-info">
+                        <strong>Đang sửa chữa</strong>
+                        <span>Thợ đang thay thế linh kiện...</span>
+                    </div>
+                </div>
+                <div class="status-step">
+                    <div class="status-dot"><i class="fa-solid fa-credit-card"></i></div>
+                    <div class="status-info">
+                        <strong>Thanh toán</strong>
+                        <span>Thanh toán sau khi hoàn tất</span>
+                    </div>
+                </div>
+                <div class="status-step">
+                    <div class="status-dot"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="status-info">
+                        <strong>Bảo hành</strong>
+                        <span>Nhận phiếu bảo hành điện tử</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-modal-primary" id="btn-go-home">
+                    <i class="fa-solid fa-house"></i> Về trang chủ
+                </button>
+                <button class="btn-modal-secondary" id="btn-close-modal">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REJECT MODAL -->
+    <div class="modal-overlay" id="reject-modal-overlay">
+        <div class="modal-card" id="reject-modal-card">
+            <div class="modal-icon reject">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <h2>Xác nhận từ chối sửa chữa</h2>
+            <p class="modal-subtitle">Bạn sẽ chỉ thanh toán phí khảo sát tận nơi <strong>50.000 ₫</strong>. Đơn hàng sẽ được đóng.</p>
+
+            <div class="reject-confirm-box">
+                <i class="fa-solid fa-info-circle"></i>
+                <p>Lưu ý: Phí khảo sát là bắt buộc nhằm bảo vệ quyền lợi kỹ thuật viên đã di chuyển tận nơi. Bạn có thể tạo đơn sửa chữa mới bất cứ lúc nào.</p>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-modal-reject" id="btn-confirm-reject">
+                    <i class="fa-solid fa-circle-xmark"></i> Xác nhận từ chối — Trả 50.000 ₫
+                </button>
+                <button class="btn-modal-secondary" id="btn-cancel-reject">
+                    Quay lại xem báo giá
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Team Lucky Engineers - Dự án OnliFix.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script_webpage.js"></script>
+    <script src="../js/quote.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>

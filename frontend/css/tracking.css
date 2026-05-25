@@ -1,0 +1,502 @@
+/* ============================================
+   OnliFix — Live Tracking & Routing Page
+   ============================================ */
+
+/* Full-viewport shell */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.tracking-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ============================================
+   TOP PANE — Map (60%)
+   ============================================ */
+.map-pane {
+    flex: 6;
+    position: relative;
+    min-height: 0;
+}
+
+#tracking-map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* --- Top Bar Overlay --- */
+.map-topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background-color: rgba(15,23,42,.85);
+    background: linear-gradient(180deg, rgba(15,23,42,.85) 0%, rgba(15,23,42,.35) 80%, transparent 100%);
+    pointer-events: none;
+}
+
+.map-topbar > * { pointer-events: auto; }
+
+.topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,.3);
+}
+
+.topbar-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-pill {
+    background: rgba(16,185,129,.2);
+    color: #6ee7b7;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(16,185,129,.3);
+    backdrop-filter: blur(6px);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,.35); }
+    50%     { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+}
+
+.order-id-label {
+    font-size: 11px;
+    color: rgba(255,255,255,.6);
+    font-weight: 500;
+}
+
+.topbar-back {
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255,255,255,.15);
+    transition: background .2s;
+}
+
+.topbar-back:hover { background: rgba(255,255,255,.2); }
+
+/* --- ETA Floating Pill --- */
+.eta-pill {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.05);
+    animation: floatUp .5s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes floatUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.eta-dot {
+    width: 12px; height: 12px;
+    background: #10b981;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: dotPulse 1.5s infinite;
+}
+
+@keyframes dotPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,.5); }
+    70%  { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+
+.eta-content { display: flex; flex-direction: column; }
+
+.eta-label {
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.eta-time {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -.3px;
+}
+
+.eta-dist {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0,160,233,.08);
+    color: #00a0e9;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid rgba(0,160,233,.15);
+    white-space: nowrap;
+}
+
+/* ============================================
+   BOTTOM PANE — Info Card (40%)
+   ============================================ */
+.info-pane {
+    flex: 4;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px 16px;
+    gap: 16px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* --- Technician Card --- */
+.tech-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #fff;
+    padding: 18px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06), 0 0 0 1px rgba(0,0,0,.03);
+}
+
+.tech-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+}
+
+.avatar-ring {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.tech-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 3px solid #00a0e9;
+    box-shadow: 0 4px 14px rgba(0,160,233,.2);
+}
+
+.online-badge {
+    position: absolute;
+    bottom: 2px; right: 2px;
+    width: 14px; height: 14px;
+    background: #10b981;
+    border-radius: 50%;
+    border: 2.5px solid #fff;
+    animation: dotPulse 1.5s infinite;
+}
+
+.tech-text { flex: 1; min-width: 0; }
+
+.tech-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
+}
+
+.tech-name-row h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.verified-icon { color: #00a0e9; font-size: 14px; }
+
+.tech-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #f59e0b;
+    margin-bottom: 4px;
+}
+
+.rating-count { color: #94a3b8; font-weight: 400; font-size: 12px; }
+
+.tech-status {
+    margin: 0;
+    font-size: 13px;
+    color: #10b981;
+    font-weight: 600;
+}
+
+.tech-status i { margin-right: 4px; }
+
+/* Action Buttons */
+.tech-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all .25s cubic-bezier(.4,0,.2,1);
+    white-space: nowrap;
+}
+
+.btn-call {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(16,185,129,.3);
+}
+
+.btn-call:hover {
+    box-shadow: 0 6px 22px rgba(16,185,129,.4);
+    transform: translateY(-1px);
+}
+
+.btn-call i { animation: ringShake 3s ease-in-out infinite; }
+
+@keyframes ringShake {
+    0%,50%,100% { transform: rotate(0); }
+    5%  { transform: rotate(-12deg); }
+    10% { transform: rotate(12deg); }
+    15% { transform: rotate(-8deg); }
+    20% { transform: rotate(8deg); }
+    25% { transform: rotate(0); }
+}
+
+.btn-chat {
+    background: linear-gradient(135deg, #00a0e9, #0066cc);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0,160,233,.3);
+}
+
+.btn-chat:hover {
+    box-shadow: 0 6px 22px rgba(0,160,233,.4);
+    transform: translateY(-1px);
+}
+
+/* --- Order Summary Mini --- */
+.order-mini {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.04), 0 0 0 1px rgba(0,0,0,.03);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.order-mini-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: #334155;
+}
+
+.order-mini-row i {
+    color: #00a0e9;
+    font-size: 15px;
+    width: 20px;
+    text-align: center;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.order-mini-row .mini-label {
+    display: block;
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+    margin-bottom: 1px;
+}
+
+.order-mini-row strong {
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.price-highlight { color: #00a0e9 !important; font-size: 15px !important; }
+
+/* Cancel Button */
+.btn-cancel {
+    width: 100%;
+    padding: 12px;
+    background: none;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    color: #ef4444;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-cancel:hover { background: #fef2f2; border-color: #ef4444; }
+
+/* ============================================
+   CUSTOM MAP MARKERS
+   ============================================ */
+.custom-marker { background: none; border: none; }
+
+.marker-pin {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,.25);
+    position: relative;
+}
+
+.marker-pin::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
+
+.marker-pin.home {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.marker-pin.home::after { border-top: 10px solid #059669; }
+
+.marker-pin.tech {
+    background: linear-gradient(135deg, #00a0e9, #0066cc);
+    animation: techPulse 2s infinite;
+}
+
+.marker-pin.tech::after { border-top: 10px solid #0066cc; }
+
+@keyframes techPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(0,160,233,.5); }
+    70%  { box-shadow: 0 0 0 18px rgba(0,160,233,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,160,233,0); }
+}
+
+/* Leaflet overrides */
+.leaflet-popup-content-wrapper {
+    border-radius: 12px !important;
+    box-shadow: 0 8px 28px rgba(0,0,0,.15) !important;
+    padding: 2px !important;
+}
+
+.leaflet-popup-content {
+    margin: 10px 14px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+}
+
+.leaflet-popup-content b { color: #00a0e9; font-weight: 700; }
+
+/* Hide the routing itinerary panel */
+.leaflet-routing-container { display: none !important; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .map-topbar { padding: 8px 12px; }
+    .topbar-status { display: none; }
+
+    .eta-pill { padding: 10px 16px; gap: 10px; bottom: 10px; }
+    .eta-time { font-size: 15px; }
+
+    .info-pane { padding: 14px 14px 12px; gap: 12px; }
+
+    .tech-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+    }
+
+    .tech-actions {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .btn-action { flex: 1; }
+    .tech-avatar { width: 48px; height: 48px; }
+    .tech-name-row h3 { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    .eta-dist { display: none; }
+    .order-mini { display: none; }
+
+    /* On very small screens, give more to the map */
+    .map-pane  { flex: 5; }
+    .info-pane { flex: 5; }
+}

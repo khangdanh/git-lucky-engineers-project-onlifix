@@ -1,0 +1,270 @@
+/* src/css/admin.css */
+
+.admin-body {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f8fafc;
+    /* Nền xám nhạt cho bảng điều khiển */
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 260px;
+    background-color: #0f172a;
+    color: #94a3b8;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+}
+
+.sidebar-header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    gap: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    border-bottom: 1px solid #1e293b;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+    flex: 1;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.sidebar-menu li a i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li.active a {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-right: 4px solid var(--primary-color);
+}
+
+.sidebar-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #1e293b;
+}
+
+.sidebar-footer a:hover {
+    color: white;
+}
+
+/* Main Content */
+.admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.main-header {
+    height: 80px;
+    background-color: white;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.search-bar {
+    position: relative;
+    width: 300px;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    outline: none;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+}
+
+.admin-profile i {
+    font-size: 20px;
+    color: #64748b;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background-color: var(--text-dark); /* darker background for sufficient contrast */
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+    padding: 40px;
+}
+
+.page-title {
+    margin-bottom: 25px;
+    font-size: 24px;
+    color: #1e293b;
+}
+
+/* KPI Cards */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.kpi-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.kpi-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.kpi-info h3 {
+    font-size: 24px;
+    color: #1e293b;
+}
+
+.kpi-info p {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Charts Section */
+.charts-grid {
+    margin-bottom: 40px;
+}
+
+.chart-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+/* Data Table */
+.data-section {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 15px;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Action Buttons in Table */
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-approve {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.btn-approve:hover {
+    background-color: #16a34a;
+    color: white;
+}
+
+.btn-reject {
+    background-color: #fee2e2;
+    color: #dc2626;
+    margin-left: 5px;
+}
+
+.btn-reject:hover {
+    background-color: #dc2626;
+    color: white;
+}
+
+.doc-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+}

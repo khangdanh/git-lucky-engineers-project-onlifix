@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnliFix - Sửa Chữa Điện Tử Khẩn Cấp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="icon" href="../img/logo.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <header role="banner">
+        <div class="container nav-container">
+            <a href="webpage.html" class="logo">
+                <img src="../img/logo.png" alt="OnliFix" style="height: 40px;"> OnliFix
+            </a>
+
+            <button class="mobile-nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="main-nav" class="nav-links" role="navigation" aria-label="Menu chính">
+                <a href="webpage.html">Trang chủ</a>
+                <a href="search-results.html">Tìm thợ</a>
+                <a href="booking.html"><i class="fa-solid fa-calendar-check"></i> Đặt lịch</a>
+                <a href="map.html"><i class="fa-solid fa-map-location-dot"></i> Bản đồ</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="customer-dashboard.html" class="btn btn-outline" aria-label="Tài khoản"><i class="fa-solid fa-user"></i> Tài khoản</a>
+                <a href="login.html" class="btn btn-primary">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+
+    <section class="hero" id="top-search">
+        <div class="container hero-container">
+            <div class="hero-content animate-on-scroll">
+                <h1>Sửa Chữa Điện Tử Khẩn Cấp Tận Nơi - Minh Bạch, Nhanh Chóng</h1>
+                <p>Kết nối ngay với đội ngũ kỹ thuật viên uy tín gần bạn. Chuyên sửa chữa mọi thiết bị điện tử, điện
+                    lạnh và đồ gia dụng.</p>
+
+                <div class="search-box">
+                    <select id="device-select" aria-label="Chọn thiết bị cần sửa chữa">
+                        <option value="">Bạn cần sửa thiết bị gì?</option>
+                        <option value="laptop">💻 Máy tính / Laptop / PC</option>
+                        <option value="phone">📱 Điện thoại / Máy tính bảng</option>
+                        <option value="ac">❄️ Điện lạnh (Máy lạnh, Tủ lạnh...)</option>
+                        <option value="tv">📺 TV & Thiết bị nghe nhìn</option>
+                        <option value="home-appliance">🍳 Đồ gia dụng (Lò vi sóng, Máy giặt...)</option>
+                        <option value="smarthome">🏠 Nhà thông minh (Camera, Robot hút bụi...)</option>
+                        <option value="other">🔧 Thiết bị điện tử khác</option>
+                    </select>
+                    <button id="search-btn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Tìm thợ
+                        ngay</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Kỹ thuật viên sửa chữa OnliFix">
+            </div>
+        </div>
+    </section>
+
+    <section class="categories container">
+        <h2 class="section-title animate-on-scroll">Dịch Vụ Sửa Chữa Nổi Bật</h2>
+        <div class="category-grid">
+            <a href="#" class="category-card" data-value="laptop">
+                <i class="fa-solid fa-laptop"></i>
+                <h3>Máy tính / Laptop</h3>
+            </a>
+            <a href="#" class="category-card" data-value="phone">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <h3>Điện thoại / Tablet</h3>
+            </a>
+            <a href="#" class="category-card" data-value="ac">
+                <i class="fa-solid fa-snowflake"></i>
+                <h3>Điện lạnh</h3>
+            </a>
+            <a href="#" class="category-card" data-value="tv">
+                <i class="fa-solid fa-tv"></i>
+                <h3>TV & Âm thanh</h3>
+            </a>
+            <a href="#" class="category-card" data-value="home-appliance">
+                <i class="fa-solid fa-blender"></i>
+                <h3>Đồ gia dụng</h3>
+            </a>
+            <a href="#" class="category-card" data-value="smarthome">
+                <i class="fa-solid fa-house-signal"></i>
+                <h3>Nhà thông minh</h3>
+            </a>
+        </div>
+    </section>
+
+    <section class="steps container">
+        <h2 class="section-title animate-on-scroll">Cách OnliFix Hoạt Động</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                <h3>1. Mô tả tình trạng</h3>
+                <p>Chọn thiết bị và mô tả sơ lược hoặc tải ảnh/video lỗi hỏng lên hệ thống.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <h3>2. Nhận báo giá</h3>
+                <p>Nhận báo giá dự kiến và chọn thợ dựa trên đánh giá sao (Rating) từ người dùng khác.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-person-biking"></i></div>
+                <h3>3. Thợ đến sửa tận nơi</h3>
+                <p>Theo dõi vị trí thợ trên bản đồ. Thợ kiểm tra và sửa chữa ngay tại nhà bạn.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>4. Thanh toán & Bảo hành</h3>
+                <p>Thanh toán không tiền mặt và nhận ngay Phiếu bảo hành điện tử trên ứng dụng.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Tại Sao Chọn OnliFix?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <div>
+                        <h3>Minh bạch giá cả</h3>
+                        <p>Báo giá chi tiết linh kiện và công thợ trước khi tiến hành sửa chữa. Không lo phụ phí ẩn.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-user-check"></i>
+                    <div>
+                        <h3>Đội ngũ thợ uy tín</h3>
+                        <p>100% thợ được xác thực danh tính (CCCD), bằng cấp và được đánh giá khách quan bởi cộng đồng.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    <div>
+                        <h3>Theo dõi thời gian thực</h3>
+                        <p>Biết chính xác thợ đang ở đâu và bao lâu nữa sẽ đến nhà bạn qua hệ thống định vị GPS.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-file-shield"></i>
+                    <div>
+                        <h3>Bảo vệ an toàn tối đa</h3>
+                        <p>Hệ thống lưu trữ hóa đơn, cấp chứng nhận bảo hành điện tử và hỗ trợ giải quyết tranh chấp
+                            24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="color: white; margin-bottom: 20px;">
+                        <img src="../img/logo.png" alt="OnliFix" style="height: 30px; filter: brightness(0) invert(1);">
+                        OnliFix
+                    </div>
+                    <p style="color: #94a3b8;">Nền tảng kết nối sửa chữa thiết bị điện tử & điện lạnh uy tín hàng đầu.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Dịch Vụ Nổi Bật</h4>
+                    <ul>
+                        <li><a href="search-results.html">Sửa Laptop / PC</a></li>
+                        <li><a href="search-results.html">Sửa Điện thoại</a></li>
+                        <li><a href="search-results.html">Bảo dưỡng Điện lạnh</a></li>
+                        <li><a href="search-results.html">Sửa Đồ gia dụng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hỗ Trợ</h4>
+                    <ul>
+                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Quy trình giải quyết khiếu nại</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Hệ</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-phone"></i> Hotline: 1900 xxxx</li>
+                        <li><i class="fa-solid fa-envelope"></i> support@onlifix.vn</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Thủ Dầu Một, Bình Dương</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Team Lucky Engineers - Dự án OnliFix.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script_webpage.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>

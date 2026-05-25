@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản đồ Linh kiện - OnliFix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/map.css">
+    <link rel="icon" href="../img/logo.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <header role="banner">
+        <div class="container nav-container">
+            <a href="webpage.html" class="logo">
+                <img src="../img/logo.png" alt="OnliFix" style="height: 40px;"> OnliFix
+            </a>
+
+            <button class="mobile-nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="main-nav" class="nav-links" role="navigation" aria-label="Menu chính">
+                <a href="webpage.html">Trang chủ</a>
+                <a href="search-results.html">Tìm thợ</a>
+                <a href="booking.html"><i class="fa-solid fa-calendar-check"></i> Đặt lịch</a>
+                <a href="map.html" class="active"><i class="fa-solid fa-map-location-dot"></i> Bản đồ</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="customer-dashboard.html" class="btn btn-outline"><i class="fa-solid fa-user"></i> Tài khoản</a>
+                <a href="login.html" class="btn btn-primary">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="map-layout" role="main">
+        <aside class="map-sidebar">
+            <div class="search-filter">
+                <h2>Tìm linh kiện gần bạn</h2>
+                <div class="input-field" style="margin-top: 15px;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Tìm: IC nguồn, RAM, Block tủ lạnh..." id="search-store" aria-label="Tìm cửa hàng linh kiện">
+                </div>
+            </div>
+
+            <div class="store-list" id="store-list">
+            </div>
+        </aside>
+
+        <div id="map-view" class="map-view"></div>
+    </main>
+
+    <script src="../js/script_webpage.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/map.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>

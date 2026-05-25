@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán & Đánh giá - OnliFix Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        :root {
+            --primary: #00a0e9;
+            --primary-hover: #0088cc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --white: #ffffff;
+            --bg-body: #f8fafc;
+            --gold: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Demo Trigger Button */
+        .trigger-btn {
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .trigger-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           MODAL OVERLAY
+           ============================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ============================================
+           MODAL CARD
+           ============================================ */
+        .modal-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 460px;
+            border-radius: 24px;
+            padding: 32px 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #e2e8f0;
+            color: var(--text-dark);
+        }
+
+        /* Header */
+        .modal-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 16px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           PAYMENT SECTION
+           ============================================ */
+        .payment-section {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .total-cost-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+
+        .total-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .method-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .method-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .method-info i {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Radio Button Styling */
+        .method-label input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            position: relative;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .method-label input[type="radio"]:checked {
+            border-color: var(--primary);
+        }
+
+        .method-label input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        /* Active State */
+        .method-label:has(input[type="radio"]:checked) {
+            border-color: var(--primary);
+            background: rgba(0, 160, 233, 0.04);
+        }
+
+        .method-label:has(input[type="radio"]:checked) .method-info i {
+            color: var(--primary);
+        }
+
+        /* ============================================
+           RATING & FEEDBACK SECTION
+           ============================================ */
+        .rating-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .rating-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        /* Stars System */
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            direction: rtl; /* For clean hover effect from left to right */
+        }
+
+        .star-icon {
+            font-size: 32px;
+            color: #cbd5e1; /* Default grey */
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        /* 
+           Hover Effect: Because of RTL direction, hovering a star highlights it
+           and all its following siblings (which visually appear to the left).
+        */
+        .star-icon:hover,
+        .star-icon:hover ~ .star-icon {
+            color: var(--gold);
+        }
+
+        /* Active/Selected State */
+        .stars-container[data-rating="5"] .star-icon:nth-last-child(n+1),
+        .stars-container[data-rating="4"] .star-icon:nth-last-child(n+2),
+        .stars-container[data-rating="3"] .star-icon:nth-last-child(n+3),
+        .stars-container[data-rating="2"] .star-icon:nth-last-child(n+4),
+        .stars-container[data-rating="1"] .star-icon:nth-last-child(n+5) {
+            color: var(--gold);
+        }
+
+        /* Scale on hover for interactivity */
+        .star-icon:hover {
+            transform: scale(1.15);
+        }
+
+        .rating-label-text {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            min-height: 18px; /* reserve space */
+            margin-bottom: 16px;
+        }
+
+        /* Feedback Textarea */
+        .feedback-input {
+            width: 100%;
+            height: 80px;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .feedback-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* ============================================
+           ACTION BUTTON
+           ============================================ */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #00a0e9, #2563eb);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(0, 160, 233, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0, 160, 233, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <main id="main-content" role="main">
+
+    <!-- Demo Trigger -->
+    <div style="text-align: center;">
+        <button class="trigger-btn" id="demo-trigger" style="margin-bottom: 20px;">
+            <i class="fa-solid fa-flag-checkered"></i> Mở Popup Thanh Toán & Đánh Giá
+        </button>
+        <br>
+        <a href="tech-workspace.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">
+            <i class="fa-solid fa-arrow-left"></i> Trở về Workspace
+        </a>
+    </div>
+
+    <!-- ============================================
+         CHECKOUT & RATING MODAL
+         ============================================ -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-card">
+            
+            <button class="close-btn" id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h2 class="modal-title">Sửa Chữa Hoàn Tất</h2>
+                <p class="modal-subtitle">Vui lòng thanh toán và đánh giá chất lượng dịch vụ.</p>
+            </div>
+
+            <form id="checkout-form">
+                <!-- Payment Methods -->
+                <div class="payment-section">
+                    <div class="total-cost-area">
+                        <span class="total-label">Tổng thanh toán:</span>
+                        <span class="total-amount">1.764.000 ₫</span>
+                    </div>
+
+                    <div class="payment-methods">
+                        <label class="method-label">
+                            <div class="method-info">
+                                <i class="fa-solid fa-money-bill-wave"></i> Tiền mặt
+                            </div>
+                            <input type="radio" name="payment_method" value="cash" checked aria-label="Phương thức thanh toán: Tiền mặt">
+                        </label>
+                        <label class="method-label">
+                            <div class="method-info">
+                                <i class="fa-solid fa-wallet" style="color: #10b981;"></i> Ví OnliFix
+                            </div>
+                            <input type="radio" name="payment_method" value="onlifix_wallet" aria-label="Phương thức thanh toán: Ví OnliFix">
+                        </label>
+                        <label class="method-label">
+                            <div class="method-info">
+                                <i class="fa-solid fa-building-columns"></i> Chuyển khoản ngân hàng
+                            </div>
+                            <input type="radio" name="payment_method" value="bank_transfer" aria-label="Phương thức thanh toán: Chuyển khoản ngân hàng">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Rating -->
+                <div class="rating-section">
+                    <h3 class="rating-title">Trải nghiệm của bạn thế nào?</h3>
+                    
+                    <div class="stars-container" id="stars-container" data-rating="0">
+                        <!-- Note: Value 5 is first because of direction: rtl -->
+                        <i class="fa-solid fa-star star-icon" data-value="5"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="4"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="3"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="2"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="1"></i>
+                    </div>
+                    <span class="rating-label-text" id="rating-label">Chưa đánh giá</span>
+
+                    <textarea class="feedback-input" id="feedback-text" placeholder="Để lại đánh giá cho kỹ thuật viên Đặng Khoa (Không bắt buộc)..."></textarea>
+                </div>
+
+                <!-- Submit Action -->
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-shield-check"></i> Hoàn Thành & Lưu Phiếu Bảo Hành
+                </button>
+            </form>
+            
+        </div>
+    </div>
+
+        </main>
+
+        <!-- ============================================
+            JAVASCRIPT LOGIC
+            ============================================ -->
+    <script src="../js/script_webpage.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Elements
+            const modal = document.getElementById('checkout-modal');
+            const btnTrigger = document.getElementById('demo-trigger');
+            const btnClose = document.getElementById('close-modal');
+            const form = document.getElementById('checkout-form');
+            
+            const starsContainer = document.getElementById('stars-container');
+            const stars = document.querySelectorAll('.star-icon');
+            const ratingLabel = document.getElementById('rating-label');
+            
+            let currentRating = 0;
+
+            // Rating Labels
+            const ratingTexts = {
+                1: "Rất tệ",
+                2: "Tệ",
+                3: "Bình thường",
+                4: "Tốt",
+                5: "Tuyệt vời!"
+            };
+
+            // Modal Controls
+            btnTrigger.addEventListener('click', () => {
+                modal.classList.add('active');
+            });
+
+            btnClose.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) modal.classList.remove('active');
+            });
+
+            // Star Hover Interactivity
+            stars.forEach(star => {
+                // When hovering over a star, show the preview text
+                star.addEventListener('mouseenter', function() {
+                    const value = this.getAttribute('data-value');
+                    ratingLabel.textContent = ratingTexts[value];
+                });
+
+                // When leaving the container, revert to the clicked rating text
+                starsContainer.addEventListener('mouseleave', function() {
+                    if (currentRating > 0) {
+                        ratingLabel.textContent = ratingTexts[currentRating];
+                    } else {
+                        ratingLabel.textContent = "Chưa đánh giá";
+                    }
+                });
+
+                // When clicking a star, save the value
+                star.addEventListener('click', function() {
+                    currentRating = this.getAttribute('data-value');
+                    starsContainer.setAttribute('data-rating', currentRating);
+                    ratingLabel.textContent = ratingTexts[currentRating];
+                    
+                    // Add a tiny bounce animation class (optional)
+                    this.style.transform = "scale(1.3)";
+                    setTimeout(() => {
+                        this.style.transform = "";
+                    }, 200);
+                });
+            });
+
+            // Form Submit Logic
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Validate rating
+                if (currentRating == 0) {
+                    if (typeof showToast === 'function') showToast('⚠️ Vui lòng chọn số sao để đánh giá kỹ thuật viên!'); else alert('⚠️ Vui lòng chọn số sao để đánh giá kỹ thuật viên!');
+                    return;
+                }
+
+                // Capture data
+                const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+                const feedback = document.getElementById('feedback-text').value;
+
+                // Log details to console
+                console.log("=== THÔNG TIN THANH TOÁN & ĐÁNH GIÁ ===");
+                console.log("Phương thức thanh toán:", paymentMethod);
+                console.log("Số sao đánh giá:", currentRating, "sao");
+                console.log("Nhận xét:", feedback || "(Không có)");
+
+                // Alert the captured details to the user
+                const successMsg = "✅ Đã thanh toán và lưu đánh giá thành công!\n\n" +
+                    "Số sao: " + currentRating + " sao (" + ratingTexts[currentRating] + ")\n" +
+                    "Phương thức: " + (paymentMethod === 'cash' ? 'Tiền mặt' : paymentMethod === 'bank_transfer' ? 'Chuyển khoản' : 'Ví OnliFix');
+                if (typeof showToast === 'function') showToast(successMsg, 5000); else alert(successMsg);
+
+                // Close modal and reset
+                modal.classList.remove('active');
+            });
+
+        });
+    </script>
+</body>
+
+</html>

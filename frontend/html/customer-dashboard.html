@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khách hàng - OnliFix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <!-- HEADER -->
+    <header class="dashboard-header" role="banner">
+        <div class="container nav-container">
+            <a href="webpage.html" class="logo">
+                <img src="../img/logo.png" alt="OnliFix" style="height: 40px;"> OnliFix
+            </a>
+
+            <button class="mobile-nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="main-nav" class="nav-links" role="navigation" aria-label="Menu chính">
+                <a href="webpage.html">Trang chủ</a>
+                <a href="booking.html"><i class="fa-solid fa-calendar-check"></i> Đặt lịch</a>
+                <a href="tracking.html"><i class="fa-solid fa-location-dot"></i> Theo dõi</a>
+            </nav>
+
+            <div class="user-greeting">
+                <img src="https://ui-avatars.com/api/?name=Khach+Hang&background=00a0e9&color=fff" alt="Avatar" class="avatar">
+                <span>Xin chào, <span class="display-user-name">Khách hàng</span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-layout container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav" aria-label="Thao tác người dùng">
+                <a href="#" class="nav-item" data-tab="tab-profile">
+                    <i class="fa-solid fa-user"></i> Hồ sơ của tôi
+                </a>
+                <a href="#" class="nav-item" data-tab="tab-orders">
+                    <i class="fa-solid fa-clipboard-list"></i> Đơn hàng của tôi
+                </a>
+                <a href="#" class="nav-item active" data-tab="tab-warranty">
+                    <i class="fa-solid fa-shield-halved"></i> Bảo hành điện tử
+                </a>
+                <a href="booking.html" class="nav-item">
+                    <i class="fa-solid fa-calendar-check"></i> Đặt lịch sửa chữa
+                </a>
+                <a href="tracking.html" class="nav-item">
+                    <i class="fa-solid fa-location-dot"></i> Theo dõi thợ
+                </a>
+                <a href="#" class="nav-item" data-tab="tab-settings">
+                    <i class="fa-solid fa-gear"></i> Cài đặt
+                </a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main id="main-content" class="main-content" role="main">
+            <!-- PROFILE TAB -->
+            <section id="tab-profile" class="tab-pane">
+                <h2>Hồ sơ của tôi</h2>
+                <div class="profile-card">
+                    <p><strong>Họ tên:</strong> <span class="display-user-name">Đang tải...</span></p>
+                    <p><strong>Số điện thoại:</strong> <span id="profile-phone">Đang tải...</span></p>
+                    <p><strong>Email:</strong> <span id="profile-email">Đang tải...</span></p>
+                    <p><strong>Địa chỉ:</strong> Quận 1, TP. Hồ Chí Minh</p>
+                </div>
+            </section>
+
+            <!-- MY ORDERS TAB -->
+            <section id="tab-orders" class="tab-pane">
+                <h2>Đơn hàng của tôi</h2>
+                <div id="orders-container" class="orders-list">
+                    <!-- Orders will be rendered here by JS -->
+                </div>
+            </section>
+
+            <!-- E-WARRANTY TAB (Default) -->
+            <section id="tab-warranty" class="tab-pane active">
+                <h2>Bảo hành điện tử</h2>
+                <div id="warranty-container" class="warranty-list">
+                    <!-- Warranty cards will be rendered here by JS -->
+                </div>
+            </section>
+
+            <!-- SETTINGS TAB -->
+            <section id="tab-settings" class="tab-pane">
+                <h2>Cài đặt</h2>
+                <div class="settings-card">
+                    <div class="setting-item">
+                        <span id="label-email-notif">Nhận thông báo qua Email</span>
+                        <label class="switch"><input type="checkbox" checked aria-label="Nhận thông báo qua Email"><span class="slider round"></span></label>
+                    </div>
+                    <div class="setting-item">
+                        <span id="label-sms-notif">Nhận thông báo SMS</span>
+                        <label class="switch"><input type="checkbox" checked aria-label="Nhận thông báo SMS"><span class="slider round"></span></label>
+                    </div>
+                    <button class="btn btn-outline" style="margin-top: 1rem; color: #ef4444; border-color: #ef4444;" onclick="handleLogout()">Đăng xuất</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/script_webpage.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+</html>

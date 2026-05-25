@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theo Dõi Kỹ Thuật Viên - OnliFix</title>
+    <meta name="description" content="Theo dõi vị trí kỹ thuật viên trên bản đồ thời gian thực và nhắn tin trực tiếp trên OnliFix.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/tracking.css">
+    <link rel="icon" href="../img/logo.png">
+</head>
+
+<body>
+
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <div id="main-content" class="tracking-shell" role="main">
+
+        <!-- ======= TOP: MAP (60%) ======= -->
+        <section class="map-pane">
+
+            <!-- Overlay Top Bar -->
+            <div class="map-topbar">
+                <a href="webpage.html" class="topbar-logo">
+                    <img src="../img/logo.png" alt="OnliFix" style="height: 28px;"> OnliFix
+                </a>
+                <div class="topbar-status">
+                    <span class="status-pill"><i class="fa-solid fa-satellite-dish"></i> Đang theo dõi trực tiếp</span>
+                    <span class="order-id-label">Mã đơn: #OLF-2026-0505</span>
+                </div>
+                <a href="customer-dashboard.html" class="topbar-back">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+
+            <!-- Leaflet Map Container -->
+            <div id="tracking-map"></div>
+
+            <!-- ETA Floating Pill -->
+            <div class="eta-pill" id="eta-pill">
+                <div class="eta-dot"></div>
+                <div class="eta-content">
+                    <span class="eta-label">Thời gian ước tính</span>
+                    <span class="eta-time" id="eta-time">Đang tính toán...</span>
+                </div>
+                <div class="eta-dist" id="eta-dist">
+                    <i class="fa-solid fa-route"></i> <span id="eta-km">—</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= BOTTOM: INFO CARD (40%) ======= -->
+        <section class="info-pane">
+
+            <!-- Technician Card -->
+            <div class="tech-card">
+                <div class="tech-left">
+                    <div class="avatar-ring">
+                        <img src="https://ui-avatars.com/api/?name=Dang+Khoa&background=00a0e9&color=fff&bold=true&size=96" alt="KTV" class="tech-avatar">
+                        <span class="online-badge"></span>
+                    </div>
+                    <div class="tech-text">
+                        <div class="tech-name-row">
+                            <h3>Đặng Anh Khoa</h3>
+                            <i class="fa-solid fa-circle-check verified-icon"></i>
+                        </div>
+                        <div class="tech-rating">
+                            <i class="fa-solid fa-star"></i> 4.9
+                            <span class="rating-count">(156 đánh giá)</span>
+                        </div>
+                        <p class="tech-status" id="tech-status">
+                            <i class="fa-solid fa-motorcycle"></i>
+                            Đang di chuyển đến nhà bạn
+                        </p>
+                    </div>
+                </div>
+                <div class="tech-actions">
+                    <button class="btn-action btn-call" id="btn-call">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Gọi điện</span>
+                    </button>
+                    <button class="btn-action btn-chat" id="btn-chat">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <span>Nhắn tin</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Order Summary Mini -->
+            <div class="order-mini">
+                <div class="order-mini-row">
+                    <i class="fa-solid fa-wrench"></i>
+                    <div>
+                        <span class="mini-label">Dịch vụ</span>
+                        <strong>Vệ sinh máy lạnh × 2, Bơm gas R32</strong>
+                    </div>
+                </div>
+                <div class="order-mini-row">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <div>
+                        <span class="mini-label">Tổng ước tính</span>
+                        <strong class="price-highlight">760.000 ₫</strong>
+                    </div>
+                </div>
+                <div class="order-mini-row">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div>
+                        <span class="mini-label">Bảo hành</span>
+                        <strong>6 tháng cho linh kiện thay thế</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cancel link -->
+            <button class="btn-cancel" id="btn-cancel">
+                <i class="fa-solid fa-xmark"></i> Huỷ đơn hàng
+            </button>
+
+        </section>
+
+    </div>
+
+    <!-- Include shared UI script for mobile nav & toast -->
+    <script src="../js/script_webpage.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Leaflet Routing Machine JS -->
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script src="../js/tracking.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>

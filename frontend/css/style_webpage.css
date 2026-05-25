@@ -1,0 +1,934 @@
+/* ============================================
+   OnliFix — Premium Design System
+   ============================================ */
+
+/* --- DESIGN TOKENS --- */
+:root {
+    --primary-color: #00a0e9;
+    --primary-dark: #0080c4;
+    --primary-light: #33b5f0;
+    --primary-glow: rgba(0, 160, 233, 0.25);
+    --primary-subtle: rgba(0, 160, 233, 0.08);
+
+     /* Conservative: use solid color fallbacks to avoid contrast computation issues
+         Gradients are decorative; using a solid primary color improves automated checks */
+     --accent-gradient: var(--primary-color);
+     --accent-gradient-warm: var(--primary-color);
+
+    --secondary-color: #f3f4f6;
+    --surface-color: #f8fafc;
+
+    --text-dark: #0f172a;
+    --text-body: #334155;
+    --text-light: #64748b;
+    --text-muted: #94a3b8;
+
+    --white: #ffffff;
+    --border-color: #e2e8f0;
+    --border-light: #f1f5f9;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.06);
+    --shadow-glow: 0 0 30px var(--primary-glow);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- RESET & BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--text-body);
+    line-height: 1.7;
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- SCROLL ANIMATION SETUP --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for grid children */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+.stagger-6 { transition-delay: 0.3s; }
+
+/* ============================================
+   HEADER — Frosted Glass Sticky Nav
+   ============================================ */
+header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: box-shadow var(--transition-base);
+}
+
+header:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    left: 16px;
+    top: 12px;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 6px;
+    z-index: 150;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-dark); /* Use dark text for better contrast on white */
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.nav-links a {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    color: var(--text-body);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+    background: var(--primary-subtle);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Mobile nav toggle button */
+.mobile-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: var(--text-body);
+    cursor: pointer;
+}
+
+/* Mobile nav open state */
+.nav-links.open {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.98);
+    padding: 12px 24px 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    gap: 12px;
+}
+
+/* Toast for non-blocking messages */
+.toast {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    background: rgba(20,20,20,0.95);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    z-index: 9999;
+    pointer-events: none;
+}
+.toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Accessibility: focus styles */
+a:focus, .btn:focus, button:focus, input:focus, select:focus, textarea:focus {
+    outline: 3px solid rgba(0,160,233,0.18);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(0,160,233,0.06);
+}
+
+/* Only show strong focus for keyboard users */
+:where(:focus-visible) {
+    outline-color: rgba(0,160,233,0.28);
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Larger tap targets on mobile for nav links */
+.nav-links a {
+    padding: 12px 16px;
+}
+
+/* Confirm modal styles */
+.confirm-modal .confirm-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease-in-out;
+    z-index: 1200;
+}
+.confirm-modal .confirm-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.confirm-modal .confirm-dialog {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 92%;
+    max-width: 420px;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.12);
+}
+.confirm-modal .confirm-body { margin-bottom: 14px; }
+.confirm-modal .confirm-message { margin: 0; color: #0f172a; font-weight: 600; }
+.confirm-modal .confirm-actions { display:flex; gap:10px; justify-content:flex-end; }
+.confirm-modal .confirm-actions .btn { min-width: 96px; }
+
+/* ============================================
+   BUTTONS — Gradient & Glass Variants
+   ============================================ */
+.btn {
+    padding: 10px 22px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.01em;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--text-dark); /* Prefer high-contrast text on white */
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: var(--accent-gradient);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 160, 233, 0.3);
+}
+
+/* Accessibility: provide a solid background-color fallback so contrast tools can compute reliably */
+.btn-primary {
+    background-color: var(--primary-dark);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 25px rgba(0, 160, 233, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 160, 233, 0.3);
+}
+
+/* ============================================
+   HERO SECTION — Gradient + Floating Image
+   Conservative accessibility fixes: add a solid background-color fallback and ensure h1 has a readable solid color
+   ============================================ */
+.hero {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 30%, #f0fdf4 70%, #f8fafc 100%);
+    background-color: #f8fafc; /* solid fallback for accessibility tools */
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative background shapes */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 160, 233, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -50px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 201, 167, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--text-dark); /* solid color for reliable contrast */
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: var(--text-light);
+    margin-bottom: 40px;
+    line-height: 1.8;
+    max-width: 520px;
+}
+
+/* Search Box — Glass Card */
+.search-box {
+    background: var(--white);
+    padding: 12px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    gap: 12px;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    transition: box-shadow var(--transition-base);
+}
+
+.search-box:hover {
+    box-shadow: var(--shadow-xl), 0 0 0 1px rgba(0, 160, 233, 0.1);
+}
+
+.search-box select {
+    flex: 1;
+    padding: 14px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    outline: none;
+    transition: all var(--transition-fast);
+    background: var(--surface-color);
+    color: var(--text-body);
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.search-box select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+    background: var(--white);
+}
+
+.search-box .btn-primary {
+    padding: 14px 28px;
+    font-size: 15px;
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+    animation: heroFloat 6s ease-in-out infinite;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    border: 4px solid rgba(255, 255, 255, 0.8);
+}
+
+@keyframes heroFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ============================================
+   CATEGORIES — Glowing Icon Cards
+   ============================================ */
+.categories {
+    padding: 100px 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 17px;
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 40px 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow background on hover */
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 30%, var(--primary-glow) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card i {
+    font-size: 40px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(0, 160, 233, 0.08) 0%, rgba(0, 102, 204, 0.06) 100%);
+    color: var(--primary-color);
+    transition: all var(--transition-base);
+}
+
+.category-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: color var(--transition-fast);
+}
+
+.category-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 16px 40px rgba(0, 160, 233, 0.12), 0 0 0 1px rgba(0, 160, 233, 0.1);
+    transform: translateY(-8px);
+}
+
+.category-card:hover i {
+    background: var(--accent-gradient);
+    color: var(--white);
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 160, 233, 0.3);
+}
+
+.category-card:hover h3 {
+    color: var(--primary-color);
+}
+
+/* ============================================
+   HOW IT WORKS — Connected Steps
+   ============================================ */
+.steps {
+    padding: 100px 0;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+    position: relative;
+}
+
+/* Connecting line across steps */
+.steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: calc(12.5% + 40px);
+    right: calc(12.5% + 40px);
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light), var(--primary-color));
+    border-radius: 2px;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.step-card {
+    padding: 20px 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--accent-gradient);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 0 auto 24px;
+    box-shadow: 0 8px 24px rgba(0, 160, 233, 0.25);
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+/* Pulsing ring on hover */
+.step-card:hover .step-icon {
+    transform: scale(1.08);
+    box-shadow: 0 12px 32px rgba(0, 160, 233, 0.35);
+}
+
+.step-card h3 {
+    margin-bottom: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.step-card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* ============================================
+   FEATURES — Dark Section with Glow
+   ============================================ */
+.features {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: var(--white);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle decorative glow */
+.features::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0, 160, 233, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.features .section-title {
+    color: var(--white);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+}
+
+.feature-item {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all var(--transition-base);
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 160, 233, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.feature-item i {
+    font-size: 36px;
+    color: var(--primary-color);
+    min-width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 160, 233, 0.1);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+}
+
+.feature-item:hover i {
+    background: var(--accent-gradient);
+    color: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 160, 233, 0.3);
+}
+
+.feature-item h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.feature-item p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ============================================
+   FOOTER — Gradient Accent
+   ============================================ */
+footer {
+    background: #0a0f1a;
+    color: white;
+    padding: 70px 0 24px;
+    position: relative;
+}
+
+/* Gradient top border */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient-warm);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 48px;
+}
+
+.footer-col h4 {
+    margin-bottom: 20px;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 1px;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+    font-size: 14px;
+}
+
+.footer-col ul li a:hover {
+    color: var(--primary-light);
+    padding-left: 4px;
+}
+
+.footer-col ul li i {
+    width: 20px;
+    color: var(--primary-color);
+    margin-right: 6px;
+}
+
+.footer-col p {
+    color: var(--text-muted) !important;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* ============================================
+   HIGHLIGHT EFFECT — Search Select
+   ============================================ */
+.highlight-select {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 4px var(--primary-glow), var(--shadow-glow) !important;
+    transition: all var(--transition-base);
+}
+
+/* Button disabled state */
+.btn-primary:disabled {
+    background: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0, 160, 233, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 12px rgba(0, 160, 233, 0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE — Mobile-first polish
+   ============================================ */
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .hero-content p {
+        max-width: 100%;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps-grid::before {
+        display: none;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        border-radius: 8px;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 60px 0;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .steps-grid,
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}

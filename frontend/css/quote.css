@@ -1,0 +1,869 @@
+/* ============================================
+   Quote Approval Page — Professional Invoice
+   ============================================ */
+
+/* --- HERO BAR --- */
+.quote-hero {
+    background-color: #0f172a;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+    padding: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-hero::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -5%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(0, 160, 233, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.quote-hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.quote-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 160, 233, 0.15);
+    border: 1px solid rgba(0, 160, 233, 0.25);
+    color: var(--primary-light);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.quote-hero-info h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.quote-hero-info p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.quote-order-id {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.order-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.order-code {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary-light);
+    font-family: 'Inter', monospace;
+    letter-spacing: 1px;
+}
+
+/* --- MAIN LAYOUT --- */
+.quote-main {
+    padding-top: 36px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* --- SECTIONS --- */
+.quote-section {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    position: relative;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--accent-gradient);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 160, 233, 0.25);
+}
+
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-dark);
+    letter-spacing: -0.3px;
+    margin-bottom: 2px;
+}
+
+.section-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   PART 1: ISSUE SUMMARY
+   ============================================ */
+.issue-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 28px;
+    align-items: flex-start;
+}
+
+.issue-image-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.issue-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.image-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Device Info Card */
+.device-info-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.device-info-card h3,
+.damage-report h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.device-info-card h3 i {
+    color: var(--primary-color);
+}
+
+.damage-report h3 i {
+    color: #f59e0b;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--text-light);
+}
+
+.info-value {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* Damage Report */
+.tech-note {
+    display: flex;
+    gap: 14px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.tech-avatar-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.tech-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.tech-note-content p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.7;
+}
+
+/* Damage Tags */
+.damage-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.damage-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.damage-tag.critical {
+    background: rgba(239, 68, 68, 0.08);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.damage-tag.warning {
+    background: rgba(245, 158, 11, 0.08);
+    color: #d97706;
+    border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+.damage-tag.ok {
+    background: rgba(34, 197, 94, 0.08);
+    color: #16a34a;
+    border: 1px solid rgba(34, 197, 94, 0.15);
+}
+
+/* ============================================
+   PART 2: QUOTATION TABLE (Invoice Style)
+   ============================================ */
+.invoice-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 24px 28px;
+    background: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.invoice-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.invoice-from p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.invoice-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: right;
+}
+
+.invoice-meta-row {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.invoice-meta-row strong {
+    color: var(--text-dark);
+    margin-left: 8px;
+}
+
+/* Table */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.quote-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.quote-table th {
+    background: #f1f5f9;
+    padding: 14px 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.quote-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-body);
+    vertical-align: top;
+}
+
+.quote-table tbody tr:hover {
+    background: rgba(0, 160, 233, 0.02);
+}
+
+.quote-table td strong {
+    color: var(--text-dark);
+}
+
+.cell-total {
+    font-weight: 700;
+    color: var(--text-dark);
+    white-space: nowrap;
+}
+
+.col-stt { width: 40px; text-align: center; }
+.col-qty { width: 50px; text-align: center; }
+.col-price { width: 130px; text-align: right; }
+.col-total { width: 140px; text-align: right; }
+
+.quote-table th.col-stt,
+.quote-table td:first-child { text-align: center; }
+
+.quote-table th.col-price,
+.quote-table th.col-total { text-align: right; }
+
+.quote-table td:nth-child(5),
+.quote-table td:nth-child(6) { text-align: right; }
+
+.quote-table td:nth-child(4) { text-align: center; }
+
+/* Totals */
+.invoice-totals {
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    border-top: 1px solid var(--border-color);
+    background: var(--surface-color);
+}
+
+.totals-row {
+    display: flex;
+    justify-content: space-between;
+    width: 320px;
+    font-size: 14px;
+    color: var(--text-body);
+}
+
+.totals-row.discount {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.totals-row.discount i {
+    font-size: 12px;
+}
+
+.totals-row.grand-total {
+    padding-top: 14px;
+    margin-top: 4px;
+    border-top: 2px solid var(--text-dark);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+/* Warranty */
+.warranty-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 28px;
+    background: rgba(0, 160, 233, 0.04);
+    border-top: 1px solid var(--border-color);
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.6;
+}
+
+.warranty-info i {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-top: 2px;
+}
+
+.warranty-info strong {
+    color: var(--primary-color);
+}
+
+/* ============================================
+   PART 3: ACTIONS
+   ============================================ */
+.actions-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.actions-info h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.actions-info p {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.actions-buttons {
+    display: flex;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.btn-approve,
+.btn-reject {
+    padding: 18px 32px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all var(--transition-base);
+    min-width: 240px;
+}
+
+.btn-sublabel {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.btn-approve {
+    background: var(--accent-gradient);
+    color: var(--white);
+    box-shadow: 0 6px 24px rgba(0, 160, 233, 0.3);
+}
+
+.btn-approve:hover {
+    box-shadow: 0 10px 36px rgba(0, 160, 233, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn-approve:active {
+    transform: translateY(0);
+}
+
+.btn-reject {
+    background: #f8fafc;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+}
+
+.btn-reject:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.1);
+}
+
+/* ============================================
+   MODALS
+   ============================================ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 44px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px) scale(0.96);
+    transition: transform var(--transition-base);
+    text-align: center;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.modal-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 20px;
+}
+
+.modal-icon.success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.modal-icon.reject {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.modal-card h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.modal-subtitle {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+/* Status Tracker */
+.modal-status-tracker {
+    text-align: left;
+    margin-bottom: 28px;
+    padding: 20px;
+    background: var(--surface-color);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+}
+
+.status-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    position: relative;
+}
+
+.status-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 42px;
+    bottom: -10px;
+    width: 2px;
+    background: var(--border-color);
+}
+
+.status-step.completed:not(:last-child)::before {
+    background: #22c55e;
+}
+
+.status-step.active:not(:last-child)::before {
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--border-color) 100%);
+}
+
+.status-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    border: 2px solid var(--border-color);
+    background: var(--white);
+    color: var(--text-muted);
+    position: relative;
+    z-index: 1;
+}
+
+.status-step.completed .status-dot {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: white;
+}
+
+.status-step.active .status-dot {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(0, 160, 233, 0.2);
+    animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(0, 160, 233, 0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(0, 160, 233, 0.1); }
+}
+
+.status-info strong {
+    font-size: 14px;
+    color: var(--text-dark);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.status-step.completed .status-info strong {
+    color: #16a34a;
+}
+
+.status-step.active .status-info strong {
+    color: var(--primary-color);
+}
+
+.status-info span {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Reject Confirm Box */
+.reject-confirm-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.6;
+}
+
+.reject-confirm-box i {
+    color: #f59e0b;
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+/* Modal Buttons */
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-modal-primary {
+    padding: 14px 24px;
+    background: var(--accent-gradient);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 16px rgba(0, 160, 233, 0.25);
+    transition: all var(--transition-base);
+}
+
+.btn-modal-primary:hover {
+    box-shadow: 0 6px 24px rgba(0, 160, 233, 0.35);
+    transform: translateY(-2px);
+}
+
+.btn-modal-reject {
+    padding: 14px 24px;
+    background: #ef4444;
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all var(--transition-base);
+}
+
+.btn-modal-reject:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+.btn-modal-secondary {
+    padding: 12px 24px;
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all var(--transition-fast);
+}
+
+.btn-modal-secondary:hover {
+    background: var(--surface-color);
+    color: var(--text-dark);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+    .issue-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .issue-image {
+        height: 220px;
+    }
+
+    .actions-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .actions-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-approve,
+    .btn-reject {
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .quote-hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .quote-order-id {
+        align-items: center;
+    }
+
+    .quote-section {
+        padding: 20px;
+    }
+
+    .invoice-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .invoice-meta {
+        text-align: left;
+    }
+
+    .totals-row {
+        width: 100%;
+    }
+
+    .modal-card {
+        padding: 28px;
+    }
+}

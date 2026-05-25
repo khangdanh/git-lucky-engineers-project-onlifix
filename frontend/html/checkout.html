@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán & Đánh Giá - OnliFix</title>
+    <meta name="description" content="Hoàn tất thanh toán và đánh giá dịch vụ sửa chữa trên OnliFix. Nhanh chóng, minh bạch, uy tín.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/checkout.css">
+    <link rel="icon" href="../img/logo.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <!-- HEADER -->
+    <header role="banner">
+        <div class="container nav-container">
+            <a href="webpage.html" class="logo">
+                <img src="../img/logo.png" alt="OnliFix" style="height: 40px;"> OnliFix
+            </a>
+
+            <button class="mobile-nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="main-nav" class="nav-links" role="navigation" aria-label="Menu chính">
+                <a href="webpage.html">Trang chủ</a>
+                <a href="search-results.html">Tìm thợ</a>
+                <a href="booking.html"><i class="fa-solid fa-calendar-check"></i> Đặt lịch</a>
+                <a href="map.html"><i class="fa-solid fa-map-location-dot"></i> Bản đồ</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="customer-dashboard.html" class="btn btn-outline"><i class="fa-solid fa-user"></i> Tài khoản</a>
+                <a href="login.html" class="btn btn-primary">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROGRESS STEPS -->
+    <section class="checkout-progress">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-step active" id="prog-step-1">
+                    <div class="step-circle">1</div>
+                    <span>Thanh toán</span>
+                </div>
+                <div class="progress-line" id="prog-line">
+                    <div class="progress-line-fill" id="prog-line-fill"></div>
+                </div>
+                <div class="progress-step" id="prog-step-2">
+                    <div class="step-circle">2</div>
+                    <span>Đánh giá</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT — Single Column Centered -->
+    <main id="main-content" class="checkout-main container" role="main">
+
+        <!-- ===== STEP 1: PAYMENT ===== -->
+        <div class="checkout-step active" id="step-payment">
+
+            <!-- Order Completed Banner -->
+            <div class="completed-banner">
+                <div class="banner-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="banner-text">
+                    <h2>Sửa chữa đã hoàn tất!</h2>
+                    <p>Kỹ thuật viên đã hoàn thành công việc. Vui lòng thanh toán để nhận phiếu bảo hành điện tử.</p>
+                </div>
+            </div>
+
+            <!-- Invoice Card -->
+            <div class="checkout-card">
+                <div class="card-title">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <h3>Hoá Đơn Thanh Toán</h3>
+                    <span class="order-code">#OLF-2026-0505</span>
+                </div>
+
+                <!-- Technician Info -->
+                <div class="tech-mini-card">
+                    <img src="https://ui-avatars.com/api/?name=Dang+Khoa&background=00a0e9&color=fff&bold=true" alt="KTV" class="tech-mini-avatar">
+                    <div class="tech-mini-info">
+                        <strong>Đặng Anh Khoa</strong>
+                        <span><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 4.9 · Kỹ thuật viên Điện lạnh</span>
+                    </div>
+                    <span class="badge-done"><i class="fa-solid fa-check"></i> Đã hoàn thành</span>
+                </div>
+
+                <!-- Invoice Items -->
+                <div class="invoice-items">
+                    <div class="invoice-row header-row">
+                        <span class="col-item">Hạng mục</span>
+                        <span class="col-qty">SL</span>
+                        <span class="col-price">Thành tiền</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="col-item">
+                            <i class="fa-solid fa-snowflake item-icon"></i>
+                            Vệ sinh máy lạnh
+                        </span>
+                        <span class="col-qty">2</span>
+                        <span class="col-price">300.000 ₫</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="col-item">
+                            <i class="fa-solid fa-fill-drip item-icon"></i>
+                            Bơm gas máy lạnh R32
+                        </span>
+                        <span class="col-qty">1</span>
+                        <span class="col-price">350.000 ₫</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="col-item">
+                            <i class="fa-solid fa-screwdriver-wrench item-icon"></i>
+                            Thay tụ quạt dàn nóng
+                        </span>
+                        <span class="col-qty">1</span>
+                        <span class="col-price">120.000 ₫</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="col-item">
+                            <i class="fa-solid fa-truck item-icon"></i>
+                            Phí di chuyển
+                        </span>
+                        <span class="col-qty">—</span>
+                        <span class="col-price">30.000 ₫</span>
+                    </div>
+                </div>
+
+                <!-- Totals -->
+                <div class="invoice-totals">
+                    <div class="total-row">
+                        <span>Tạm tính</span>
+                        <span>800.000 ₫</span>
+                    </div>
+                    <div class="total-row discount">
+                        <span><i class="fa-solid fa-tag"></i> Giảm giá khách quen (−5%)</span>
+                        <span>−40.000 ₫</span>
+                    </div>
+                    <div class="total-row grand">
+                        <span>Tổng thanh toán</span>
+                        <span id="grand-total-amount">760.000 ₫</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="checkout-card">
+                <div class="card-title">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <h3>Phương Thức Thanh Toán</h3>
+                </div>
+
+                <div class="payment-methods">
+                        <label class="payment-option active" data-method="cash">
+                        <input type="radio" name="payment" value="cash" checked aria-label="Thanh toán bằng tiền mặt">
+                        <div class="option-icon cash-icon">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                        </div>
+                        <div class="option-info">
+                            <strong>Tiền mặt</strong>
+                            <span>Thanh toán trực tiếp cho thợ</span>
+                        </div>
+                        <div class="option-check">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </label>
+
+                        <label class="payment-option" data-method="vnpay">
+                        <input type="radio" name="payment" value="vnpay" aria-label="Thanh toán bằng VNPay (QR)">
+                        <div class="option-icon vnpay-icon">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                        <div class="option-info">
+                            <strong>VNPay</strong>
+                            <span>Quét mã QR thanh toán online</span>
+                        </div>
+                        <div class="option-check">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </label>
+
+                        <label class="payment-option" data-method="wallet">
+                        <input type="radio" name="payment" value="wallet" aria-label="Thanh toán bằng Ví OnliFix">
+                        <div class="option-icon wallet-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <div class="option-info">
+                            <strong>Ví OnliFix</strong>
+                            <span>Số dư hiện tại: 1.200.000 ₫</span>
+                        </div>
+                        <div class="option-check">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </label>
+                </div>
+
+                <button class="btn-pay" id="btn-pay">
+                    <i class="fa-solid fa-lock"></i>
+                    Thanh toán 760.000 ₫
+                </button>
+
+                <div class="secure-note">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Giao dịch được bảo mật bởi OnliFix. Phiếu bảo hành điện tử sẽ được cấp tự động sau thanh toán.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== STEP 2: RATING & REVIEW ===== -->
+        <div class="checkout-step" id="step-review">
+
+            <!-- Payment Success Banner -->
+            <div class="success-banner">
+                <div class="success-anim">
+                    <div class="success-circle">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                </div>
+                <h2>Thanh toán thành công!</h2>
+                <p>Phiếu bảo hành điện tử đã được lưu vào tài khoản của bạn.</p>
+                <div class="success-amount" id="paid-amount">760.000 ₫</div>
+            </div>
+
+            <!-- Review Card -->
+            <div class="checkout-card review-card">
+                <div class="card-title">
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <h3>Đánh Giá Dịch Vụ</h3>
+                </div>
+
+                <p class="review-prompt">Trải nghiệm của bạn với kỹ thuật viên <strong>Đặng Anh Khoa</strong> thế nào?</p>
+
+                <!-- Technician Mini Profile (Review) -->
+                <div class="review-tech-card">
+                    <img src="https://ui-avatars.com/api/?name=Dang+Khoa&background=00a0e9&color=fff&bold=true&size=80" alt="KTV" class="review-avatar">
+                    <div class="review-tech-name">Đặng Anh Khoa</div>
+                    <div class="review-tech-spec">Kỹ thuật viên Điện lạnh</div>
+                </div>
+
+                <!-- 5-Star Rating -->
+                <div class="star-rating" id="star-rating">
+                    <button class="star-btn" data-value="1" aria-label="1 sao">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <button class="star-btn" data-value="2" aria-label="2 sao">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <button class="star-btn" data-value="3" aria-label="3 sao">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <button class="star-btn" data-value="4" aria-label="4 sao">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <button class="star-btn" data-value="5" aria-label="5 sao">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                </div>
+                <div class="rating-label" id="rating-label">Chạm để đánh giá</div>
+
+                <!-- Quick Tags -->
+                <div class="review-tags" id="review-tags">
+                    <button class="tag-btn" data-tag="Đúng giờ"><i class="fa-regular fa-clock"></i> Đúng giờ</button>
+                    <button class="tag-btn" data-tag="Tay nghề tốt"><i class="fa-solid fa-thumbs-up"></i> Tay nghề tốt</button>
+                    <button class="tag-btn" data-tag="Giá hợp lý"><i class="fa-solid fa-coins"></i> Giá hợp lý</button>
+                    <button class="tag-btn" data-tag="Thân thiện"><i class="fa-regular fa-face-smile"></i> Thân thiện</button>
+                    <button class="tag-btn" data-tag="Gọn gàng"><i class="fa-solid fa-broom"></i> Gọn gàng</button>
+                    <button class="tag-btn" data-tag="Giải thích rõ"><i class="fa-solid fa-comment-dots"></i> Giải thích rõ</button>
+                </div>
+
+                <!-- Text Feedback -->
+                <div class="review-textarea-wrapper">
+                    <label for="review-text"><i class="fa-solid fa-pen-to-square"></i> Viết nhận xét (tuỳ chọn)</label>
+                    <textarea id="review-text" rows="4" placeholder="Chia sẻ thêm về trải nghiệm của bạn..."></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button class="btn-submit-review" id="btn-submit-review" disabled>
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Gửi đánh giá
+                </button>
+
+                <button class="btn-skip" id="btn-skip">
+                    Bỏ qua, về trang chủ
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-card" id="modal-card">
+            <div class="modal-confetti" id="modal-confetti"></div>
+            <div class="modal-icon-wrapper">
+                <div class="modal-icon-circle">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+            </div>
+            <h2>Cảm ơn bạn!</h2>
+            <p class="modal-subtitle">Phiếu bảo hành điện tử đã được lưu vào tài khoản. Đánh giá của bạn giúp cộng đồng OnliFix tốt hơn mỗi ngày! 🎉</p>
+
+            <div class="modal-warranty-preview">
+                <div class="warranty-mini-card">
+                    <div class="warranty-mini-header">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Phiếu Bảo Hành Điện Tử</span>
+                    </div>
+                    <div class="warranty-mini-body">
+                        <div class="warranty-mini-row">
+                            <span>Mã bảo hành</span>
+                            <strong id="modal-warranty-id">BH-20260505</strong>
+                        </div>
+                        <div class="warranty-mini-row">
+                            <span>Hạn bảo hành</span>
+                            <strong>05/11/2026 (6 tháng)</strong>
+                        </div>
+                        <div class="warranty-mini-row">
+                            <span>KTV phụ trách</span>
+                            <strong>Đặng Anh Khoa</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-modal-primary" id="btn-go-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Về trang quản lý
+                </button>
+                <button class="btn-modal-secondary" id="btn-close-modal">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Team Lucky Engineers - Dự án OnliFix.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script_webpage.js"></script>
+    <script src="../js/checkout.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>

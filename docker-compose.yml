@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgis/postgis:15-3.3
+    container_name: onlifix-db
+    environment:
+      POSTGRES_USER: onlifix_user
+      POSTGRES_PASSWORD: onlifix_password
+      POSTGRES_DB: onlifix_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_v2:/var/lib/postgresql/data
+      # Mount file schema để tự động tạo database trong lần khởi chạy đầu tiên
+      - ./backend/database/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: onlifix-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    container_name: onlifix-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - DB_USER=onlifix_user
+      - DB_PASSWORD=onlifix_password
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=onlifix_db
+      - JWT_SECRET=supersecretjwtkey_onlifix
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+      - redis
+    command: npm run dev
+
+volumes:
+  pgdata_v2:

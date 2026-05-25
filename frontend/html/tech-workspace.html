@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khu vực Kỹ Thuật Viên - OnliFix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/tech.css">
+</head>
+<body class="tech-layout">
+
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <!-- HEADER -->
+    <header class="tech-header">
+        <div class="header-content">
+            <div class="tech-profile">
+                <img src="https://ui-avatars.com/api/?name=Tho+Nam&background=10b981&color=fff" alt="Avatar" class="avatar">
+                <div class="info">
+                    <h1 class="display-user-name">Kỹ thuật viên</h1>
+                    <p>Kỹ thuật viên Sửa chữa</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="webpage.html" class="btn-home"><i class="fa-solid fa-house"></i> Trang chủ</a>
+                <a href="#" class="btn-home" id="btn-open-profile" style="margin-left: 1rem;"><i class="fa-solid fa-user-pen"></i> Hồ sơ</a>
+                <a href="#" class="btn-home" onclick="handleLogout()" style="color: #ef4444; margin-left: 1rem;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+            </div>
+        </div>
+
+        <!-- STATUS TOGGLE -->
+        <div class="status-bar">
+            <span id="status-label" class="status-label">Đang ngoại tuyến</span>
+                <label class="switch-lg">
+                <input type="checkbox" id="online-toggle" aria-label="Chuyển sang trạng thái trực tuyến">
+                <span class="slider-lg round"></span>
+            </label>
+        </div>
+        <div id="pulsing-indicator" class="pulsing-indicator hidden">
+            <div class="dot"></div>
+            <span>Đang tìm kiếm đơn hàng xung quanh...</span>
+        </div>
+    </header>
+
+    <main id="main-content" class="tech-main container" role="main">
+
+        <!-- ACTIVE ORDER SECTION -->
+        <section class="section-block">
+            <h2>Đơn hàng đang thực hiện</h2>
+            <div id="active-order-container">
+                <div class="empty-state">
+                    <p>Bạn chưa có đơn hàng nào đang thực hiện.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EARNINGS SECTION -->
+        <section class="section-block earnings-section">
+            <h2>Doanh thu hôm nay: <span class="highlight">850.000 đ</span></h2>
+            
+            <div class="chart-container">
+                <div class="bar-wrapper">
+                    <div class="bar" style="height: 40%;"></div>
+                    <span>T2</span>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar" style="height: 70%;"></div>
+                    <span>T3</span>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar" style="height: 30%;"></div>
+                    <span>T4</span>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar" style="height: 90%; background: #10b981;"></div>
+                    <span style="font-weight: bold;">H.Nay</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- INCOMING ORDER MODAL -->
+    <div id="incoming-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-bell text-yellow pulse-icon"></i> Có đơn hàng mới!</h3>
+            </div>
+            <div class="modal-body">
+                <p class="distance-alert"><i class="fa-solid fa-location-dot"></i> Cách bạn <strong>2.2 km</strong></p>
+                <div class="issue-box">
+                    <p><strong>Khách hàng:</strong> Khách hàng (Mẫu)</p>
+                    <p><strong>Vấn đề:</strong> Laptop không lên nguồn, nghi hỏng sạc hoặc pin.</p>
+                    <p><strong>Địa chỉ:</strong> 123 Lê Duẩn, Quận 1</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-reject" class="btn btn-outline-danger">Từ chối</button>
+                <button id="btn-accept" class="btn btn-success">Nhận đơn ngay</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE MODAL -->
+    <div id="profile-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 style="margin-bottom: 10px;"><i class="fa-solid fa-id-card text-primary"></i> Cập nhật Hồ sơ</h3>
+                <p style="font-size: 14px; color: #64748b; font-weight: normal;">Hoàn thiện thông tin để bắt đầu nhận đơn sửa chữa.</p>
+            </div>
+            <form id="tech-profile-form">
+                <div class="modal-body" style="text-align: left;">
+                    <div style="margin-bottom: 15px;">
+                        <label for="tech-cccd" style="display:block; margin-bottom:5px; font-weight: 600;">Số CCCD</label>
+                        <input type="text" id="tech-cccd" placeholder="Nhập 12 số Căn cước công dân" required style="width: 100%; padding: 10px 15px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label for="tech-expertise" style="display:block; margin-bottom:5px; font-weight: 600;">Chuyên môn chính</label>
+                        <input type="text" id="tech-expertise" placeholder="Ví dụ: Điện lạnh, Sửa Laptop..." required style="width: 100%; padding: 10px 15px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn-close-profile" class="btn btn-outline">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="../js/script_webpage.js"></script>
+    <script src="../js/tech.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập & Đăng ký - OnliFix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" href="../img/logo.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <header role="banner">
+        <div class="container nav-container">
+            <a href="webpage.html" class="logo">
+                <img src="../img/logo.png" alt="OnliFix" style="height: 40px;"> OnliFix
+            </a>
+
+            <button class="mobile-nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="main-nav" class="nav-links" role="navigation" aria-label="Menu chính">
+                <a href="webpage.html">Trang chủ</a>
+                <a href="search-results.html">Tìm thợ</a>
+                <a href="booking.html"><i class="fa-solid fa-calendar-check"></i> Đặt lịch</a>
+                <a href="map.html"><i class="fa-solid fa-map-location-dot"></i> Bản đồ</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="customer-dashboard.html" class="btn btn-outline"><i class="fa-solid fa-user"></i> Tài khoản</a>
+                <a href="webpage.html" class="btn btn-outline">Trở về Trang chủ</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-wrapper" role="main">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-target="login">Đăng nhập</button>
+                <button class="tab-btn" data-target="register">Đăng ký</button>
+            </div>
+
+            <div id="login-section" class="auth-content active">
+                <div class="auth-header">
+                    <h2>Mừng bạn quay lại!</h2>
+                    <p>Đăng nhập để tiếp tục sử dụng dịch vụ của OnliFix.</p>
+                </div>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="login-phone">Số điện thoại</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" id="login-phone" placeholder="Nhập số điện thoại" required aria-label="Số điện thoại đăng nhập">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-pass">Mật khẩu</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="login-pass" placeholder="Nhập mật khẩu" required aria-label="Mật khẩu">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Đăng nhập với vai trò:</label>
+                        <div class="role-selector">
+                            <label class="role-option">
+                                <input type="radio" name="login_role" value="customer" checked aria-label="Vai trò: Khách hàng">
+                                <span>Khách hàng</span>
+                            </label>
+                            <label class="role-option">
+                                <input type="radio" name="login_role" value="technician" aria-label="Vai trò: Thợ sửa chữa">
+                                <span>Thợ sửa chữa</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <label><input type="checkbox" aria-label="Ghi nhớ phiên đăng nhập"> Ghi nhớ tôi</label>
+                        <a href="forgot-password.html" class="forgot-link">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập ngay</button>
+                </form>
+            </div>
+
+            <div id="register-section" class="auth-content">
+                <div class="auth-header">
+                    <h2>Tham gia OnliFix</h2>
+                    <p>Trở thành khách hàng hoặc đối tác sửa chữa ngay hôm nay.</p>
+                </div>
+                <form id="register-form">
+                    <div class="input-group">
+                        <label for="reg-name">Họ và tên</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="reg-name" placeholder="Ví dụ: Phan Ngọc Thuận" required aria-label="Họ và tên đăng ký">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-phone">Số điện thoại</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" id="reg-phone" placeholder="Số điện thoại của bạn" required aria-label="Số điện thoại đăng ký">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-email">Email (Không bắt buộc)</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="reg-email" placeholder="Email của bạn" aria-label="Email đăng ký">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-pass">Mật khẩu</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="reg-pass" placeholder="Tạo mật khẩu (ít nhất 6 ký tự)" required aria-label="Mật khẩu đăng ký">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Bạn là ai?</label>
+                        <div class="role-selector">
+                            <label class="role-option">
+                                <input type="radio" name="role" value="customer" checked aria-label="Vai trò đăng ký: Khách hàng">
+                                <span>Khách hàng</span>
+                            </label>
+                            <label class="role-option">
+                                <input type="radio" name="role" value="technician" aria-label="Vai trò đăng ký: Thợ sửa chữa">
+                                <span>Thợ sửa chữa</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Tạo tài khoản</button>
+                </form>
+            </div>
+
+            <div class="social-auth">
+                <div class="divider"><span>Hoặc</span></div>
+                <div class="social-btns">
+                    <button class="social-btn google">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google" width="20"> Đăng nhập với Google
+                    </button>
+                    <button class="social-btn facebook">
+                        <i class="fa-brands fa-facebook"></i> Đăng nhập với Facebook
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/script_webpage.js"></script>
+    <script src="../js/login.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>

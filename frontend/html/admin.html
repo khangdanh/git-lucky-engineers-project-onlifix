@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnliFix Admin - Bảng Điều Khiển</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../img/logo.png">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="admin-body">
+
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <img src="../img/logo.png" alt="OnliFix" style="height: 35px; filter: brightness(0) invert(1);">
+            <span>Trung tâm Quản trị</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active"><a href="#"><i class="fa-solid fa-chart-pie"></i> Tổng quan</a></li>
+            <li><a href="#"><i class="fa-solid fa-users-gear"></i> Quản lý Thợ (Duyệt)</a></li>
+            <li><a href="#"><i class="fa-solid fa-users"></i> Quản lý Khách hàng</a></li>
+            <li><a href="#"><i class="fa-solid fa-scale-balanced"></i> Giải quyết Khiếu nại</a></li>
+            <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Cửa hàng Linh kiện</a></li>
+            <li><a href="#"><i class="fa-solid fa-wallet"></i> Quản lý Giao dịch</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+        </div>
+    </aside>
+
+    <main id="main-content" class="admin-main" role="main">
+        <header class="main-header" role="banner">
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="text" placeholder="Tìm kiếm thợ, số điện thoại, mã đơn..." aria-label="Tìm kiếm hồ sơ hoặc đơn">
+            </div>
+            <div class="admin-profile">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-circle">AD</div>
+                <span>Hệ thống</span>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <h2 class="page-title">Tổng quan Hệ thống</h2>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #e0f2fe; color: #0ea5e9;"><i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="kpi-info">
+                        <h3>1,245</h3>
+                        <p>Tổng Khách hàng</p>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #dcfce7; color: #0284c7;"><i
+                            class="fa-solid fa-user-gear"></i></div>
+                    <div class="kpi-info">
+                        <h3>320</h3>
+                        <p>Thợ đang hoạt động</p>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #fef9c3; color: #16a34a;"><i
+                            class="fa-solid fa-check-to-slot"></i></div>
+                    <div class="kpi-info">
+                        <h3>4,500+</h3>
+                        <p>Đơn hàng hoàn tất</p>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #fee2e2; color: #dc2626;"><i
+                            class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="kpi-info">
+                        <h3 style="color: #dc2626;">5</h3>
+                        <p>Khiếu nại chờ xử lý</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="section-header">
+                        <h3>Biểu đồ Doanh thu (7 ngày qua)</h3>
+                    </div>
+                    <div style="position: relative; height: 300px; width: 100%;">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-section">
+                <div class="section-header">
+                    <h3>Hồ sơ Thợ chờ xét duyệt</h3>
+                    <button class="btn btn-outline" style="padding: 8px 15px;">Xem tất cả</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Họ Tên</th>
+                                <th>SĐT</th>
+                                <th>Chuyên môn</th>
+                                <th>Hồ sơ đính kèm</th>
+                                <th>Ngày đăng ký</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="approval-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/script_webpage.js"></script>
+    <script src="../js/admin.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>

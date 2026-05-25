@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả tìm thợ - OnliFix</title>
+    <meta name="description" content="Tìm kiếm và chọn kỹ thuật viên sửa chữa điện tử uy tín gần bạn trên nền tảng OnliFix.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style_webpage.css">
+    <link rel="stylesheet" href="../css/search.css">
+    <link rel="icon" href="../img/logo.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container nav-container">
+            <a href="webpage.html" class="logo">
+                <img src="../img/logo.png" alt="OnliFix" style="height: 40px;"> OnliFix
+            </a>
+
+            <button class="mobile-nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="main-nav" class="nav-links" role="navigation" aria-label="Menu chính">
+                <a href="webpage.html">Trang chủ</a>
+                <a href="search-results.html" class="active">Tìm thợ</a>
+                <a href="booking.html"><i class="fa-solid fa-calendar-check"></i> Đặt lịch</a>
+                <a href="map.html"><i class="fa-solid fa-map-location-dot"></i> Bản đồ</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="customer-dashboard.html" class="btn btn-outline"><i class="fa-solid fa-user"></i> Tài khoản</a>
+                <a href="login.html" class="btn btn-primary">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SEARCH RESULTS HERO BAR -->
+    <section class="search-hero">
+        <div class="container">
+            <div class="search-hero-content">
+                <div class="search-hero-info">
+                    <h1>Kết quả tìm thợ</h1>
+                    <p id="results-summary">Đang tìm kiếm kỹ thuật viên phù hợp...</p>
+                </div>
+                <div class="search-hero-device">
+                    <i class="fa-solid fa-laptop"></i>
+                    <span>Máy tính / Laptop</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="search-main container" role="main">
+
+        <!-- LEFT: FILTERS SIDEBAR -->
+        <aside class="filters-sidebar" id="filters-sidebar">
+            <div class="filter-header">
+                <h2><i class="fa-solid fa-sliders"></i> Bộ lọc</h2>
+                <button class="filter-reset-btn" id="reset-filters">Đặt lại</button>
+            </div>
+
+            <!-- Distance Filter -->
+            <div class="filter-group">
+                <h3 class="filter-title">
+                    <i class="fa-solid fa-location-crosshairs"></i> Khoảng cách
+                </h3>
+                <div class="range-slider-wrapper">
+                    <input type="range" id="distance-range" min="1" max="20" value="10" class="range-slider" aria-label="Khoảng cách tối đa (km)">
+                    <div class="range-labels">
+                        <span>1 km</span>
+                        <span class="range-value" id="distance-value">10 km</span>
+                        <span>20 km</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rating Filter -->
+            <div class="filter-group">
+                <h3 class="filter-title">
+                    <i class="fa-solid fa-star"></i> Đánh giá tối thiểu
+                </h3>
+                <div class="rating-filter">
+                        <label class="rating-option">
+                        <input type="radio" name="min-rating" value="5" aria-label="Đánh giá tối thiểu: 5 sao">
+                        <span class="rating-label">
+                            <span class="stars">★★★★★</span> 5.0
+                        </span>
+                    </label>
+                    <label class="rating-option">
+                        <input type="radio" name="min-rating" value="4" checked aria-label="Đánh giá tối thiểu: 4 sao trở lên">
+                        <span class="rating-label">
+                            <span class="stars">★★★★</span><span class="stars-empty">★</span> 4.0+
+                        </span>
+                    </label>
+                    <label class="rating-option">
+                        <input type="radio" name="min-rating" value="3" aria-label="Đánh giá tối thiểu: 3 sao trở lên">
+                        <span class="rating-label">
+                            <span class="stars">★★★</span><span class="stars-empty">★★</span> 3.0+
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="filter-group">
+                <h3 class="filter-title">
+                    <i class="fa-solid fa-tag"></i> Chuyên môn
+                </h3>
+                <div class="category-filter">
+                        <label class="checkbox-option">
+                        <input type="checkbox" value="laptop" checked aria-label="Chuyên môn: Máy tính / Laptop">
+                        <span class="checkbox-label">💻 Máy tính / Laptop</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="phone" aria-label="Chuyên môn: Điện thoại / Tablet">
+                        <span class="checkbox-label">📱 Điện thoại / Tablet</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="ac" aria-label="Chuyên môn: Điện lạnh">
+                        <span class="checkbox-label">❄️ Điện lạnh</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="tv" aria-label="Chuyên môn: TV & Âm thanh">
+                        <span class="checkbox-label">📺 TV & Âm thanh</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="home-appliance" aria-label="Chuyên môn: Đồ gia dụng">
+                        <span class="checkbox-label">🍳 Đồ gia dụng</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="smarthome" aria-label="Chuyên môn: Nhà thông minh">
+                        <span class="checkbox-label">🏠 Nhà thông minh</span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn btn-primary filter-apply-btn" id="apply-filters">
+                <i class="fa-solid fa-magnifying-glass"></i> Áp dụng bộ lọc
+            </button>
+        </aside>
+
+        <!-- RIGHT: RESULTS GRID -->
+        <section class="results-section">
+            <div class="results-toolbar">
+                <div class="results-count" id="results-count">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="results-sort">
+                    <label for="sort-select">Sắp xếp:</label>
+                    <select id="sort-select" aria-label="Sắp xếp kết quả">
+                        <option value="recommended">Đề xuất</option>
+                        <option value="rating">Đánh giá cao nhất</option>
+                        <option value="distance">Gần nhất</option>
+                        <option value="jobs">Nhiều đơn nhất</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="results-grid" id="results-grid">
+                <!-- Skeleton loaders / Technician cards rendered by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Team Lucky Engineers - Dự án OnliFix.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script_webpage.js"></script>
+    <script src="../js/search.js"></script>
+    <div id="toast" role="status" aria-live="polite" class="toast" aria-hidden="true"></div>
+</body>
+
+</html>
