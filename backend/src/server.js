@@ -21,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/bookings', require('./routes/bookingRoutes'));
+app.use('/api/parts', require('./routes/partsRoutes'));
 
 // Basic Route để kiểm tra server hoạt động
 app.get('/', (req, res) => {

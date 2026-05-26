@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Linh Kiện - OnliFix</title>
+    <link rel="stylesheet" href="../css/parts-search.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">OnliFix - Kho Linh Kiện</div>
+            <ul class="nav-menu">
+                <li><a href="webpage.html">Trang chủ</a></li>
+                <li><a href="technician.html">Quay lại</a></li>
+                <li><a href="#" id="logoutBtn">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Search Section -->
+        <section class="search-section">
+            <h1>🔧 Tìm Linh Kiện & Công Cụ Gần Bạn</h1>
+            <p class="subtitle">Tìm kiếm linh kiện chuyên biệt để nhận công việc phức tạp mà không cần mua sắm thiết bị đắt tiền</p>
+
+            <div class="search-filters">
+                <div class="filter-group">
+                    <label for="searchQuery">Tìm kiếm linh kiện:</label>
+                    <input type="text" id="searchQuery" placeholder="VD: Máy khoan, Bộ tuya, ...">
+                </div>
+
+                <div class="filter-group">
+                    <label for="categoryFilter">Danh mục:</label>
+                    <select id="categoryFilter">
+                        <option value="">-- Tất cả danh mục --</option>
+                        <option value="Điện">Điện</option>
+                        <option value="Cơ khí">Cơ khí</option>
+                        <option value="Lạnh">Lạnh</option>
+                        <option value="Nước">Nước</option>
+                        <option value="Khác">Khác</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="radiusFilter">Bán kính tìm kiếm (km):</label>
+                    <input type="number" id="radiusFilter" value="50" min="1" max="100">
+                </div>
+
+                <button class="btn-search" id="searchBtn">🔍 Tìm kiếm</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <h2>Kết quả tìm kiếm</h2>
+            
+            <!-- Warehouses nearby -->
+            <div class="warehouses-container" id="warehousesContainer">
+                <div class="loading">Đang tải...</div>
+            </div>
+
+            <!-- Parts list -->
+            <div class="parts-container" id="partsContainer">
+                <div class="loading">Nhập tiêu chí tìm kiếm để xem kết quả</div>
+            </div>
+        </section>
+
+        <!-- Booking Modal -->
+        <div id="bookingModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3>📅 Đặt Cho Thuê Linh Kiện</h3>
+                
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="partName">Linh kiện:</label>
+                        <input type="text" id="partName" disabled>
+                        <input type="hidden" id="partId">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="warehouseName">Kho:</label>
+                        <input type="text" id="warehouseName" disabled>
+                        <input type="hidden" id="warehouseId">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Số lượng:</label>
+                        <input type="number" id="quantity" value="1" min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rentalStartDate">Ngày bắt đầu:</label>
+                        <input type="date" id="rentalStartDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rentalEndDate">Ngày kết thúc:</label>
+                        <input type="date" id="rentalEndDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentMethod">Phương thức thanh toán:</label>
+                        <select id="paymentMethod">
+                            <option value="WALLET">Ví OnliFix</option>
+                            <option value="CASH">Tiền mặt</option>
+                            <option value="VNpay">VNpay</option>
+                        </select>
+                    </div>
+
+                    <div class="price-summary">
+                        <h4>💰 Tóm tắt giá:</h4>
+                        <div class="price-row">
+                            <span>Giá/ngày:</span>
+                            <span id="dailyPrice">0 VND</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Số ngày:</span>
+                            <span id="rentalDays">0</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Tổng thuê:</span>
+                            <span id="totalRental">0 VND</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Tiền đặt cọc:</span>
+                            <span id="depositAmount">0 VND</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Tổng cộng:</span>
+                            <span id="totalAmount">0 VND</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">✅ Xác nhận đặt cho thuê</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Warehouse Detail Modal -->
+        <div id="warehouseModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3>🏢 Chi tiết kho</h3>
+                
+                <div id="warehouseDetail">
+                    <div class="loading">Đang tải...</div>
+                </div>
+
+                <div class="warehouse-actions">
+                    <button class="btn-secondary" id="viewInventoryBtn">📦 Xem kho hàng</button>
+                    <button class="btn-secondary" id="viewReviewsBtn">⭐ Xem đánh giá</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/parts-search.js"></script>
+</body>
+</html>

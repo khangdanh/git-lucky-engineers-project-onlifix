@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Kho Linh Kiện - OnliFix</title>
+    <link rel="stylesheet" href="../css/warehouse-management.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">OnliFix - Quản Lý Kho</div>
+            <ul class="nav-menu">
+                <li><a href="admin.html">Bảng điều khiển</a></li>
+                <li><a href="#" id="logoutBtn">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="warehouses">🏢 Kho của tôi</button>
+            <button class="tab-btn" data-tab="parts">📦 Linh kiện</button>
+            <button class="tab-btn" data-tab="bookings">📅 Đơn cho thuê</button>
+            <button class="tab-btn" data-tab="analytics">📊 Thống kê</button>
+        </div>
+
+        <!-- Tab 1: Warehouses Management -->
+        <section id="warehouses-tab" class="tab-content active">
+            <h2>🏢 Quản Lý Kho Linh Kiện</h2>
+
+            <button class="btn-primary" id="createWarehouseBtn">➕ Tạo kho mới</button>
+
+            <div class="warehouses-list" id="warehousesList">
+                <div class="loading">Đang tải kho...</div>
+            </div>
+        </section>
+
+        <!-- Tab 2: Parts Management -->
+        <section id="parts-tab" class="tab-content hidden">
+            <h2>📦 Quản Lý Linh Kiện</h2>
+
+            <div class="parts-controls">
+                <button class="btn-primary" id="createPartBtn">➕ Thêm loại linh kiện</button>
+                <button class="btn-secondary" id="addToInventoryBtn">📥 Thêm vào kho</button>
+            </div>
+
+            <div class="parts-list" id="partsList">
+                <div class="loading">Đang tải linh kiện...</div>
+            </div>
+        </section>
+
+        <!-- Tab 3: Bookings Management -->
+        <section id="bookings-tab" class="tab-content hidden">
+            <h2>📅 Quản Lý Đơn Cho Thuê</h2>
+
+            <div class="bookings-filters">
+                <select id="bookingStatusFilter">
+                    <option value="">-- Tất cả trạng thái --</option>
+                    <option value="PENDING">Chờ xác nhận</option>
+                    <option value="ACTIVE">Đang cho thuê</option>
+                    <option value="COMPLETED">Hoàn thành</option>
+                    <option value="CANCELLED">Đã hủy</option>
+                </select>
+            </div>
+
+            <div class="bookings-list" id="bookingsList">
+                <div class="loading">Đang tải đơn cho thuê...</div>
+            </div>
+        </section>
+
+        <!-- Tab 4: Analytics -->
+        <section id="analytics-tab" class="tab-content hidden">
+            <h2>📊 Thống Kê & Báo Cáo</h2>
+
+            <div class="analytics-container">
+                <div class="stat-card">
+                    <h3>📦 Tổng linh kiện cho thuê</h3>
+                    <p id="totalRentals" class="stat-value">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>💰 Tổng doanh thu</h3>
+                    <p id="totalRevenue" class="stat-value">0 VND</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>⭐ Đánh giá trung bình</h3>
+                    <p id="averageRating" class="stat-value">5.0</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>📈 Tỷ lệ hoàn thành</h3>
+                    <p id="completionRate" class="stat-value">100%</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Create Warehouse Modal -->
+    <div id="warehouseModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>🏢 Tạo Kho Linh Kiện Mới</h3>
+
+            <form id="warehouseForm">
+                <div class="form-group">
+                    <label for="whName">Tên kho:</label>
+                    <input type="text" id="whName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whDescription">Mô tả:</label>
+                    <textarea id="whDescription" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="whAddress">Địa chỉ:</label>
+                    <input type="text" id="whAddress" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whLongitude">Kinh độ:</label>
+                    <input type="number" id="whLongitude" step="0.0001" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whLatitude">Vĩ độ:</label>
+                    <input type="number" id="whLatitude" step="0.0001" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whPhone">Số điện thoại:</label>
+                    <input type="tel" id="whPhone">
+                </div>
+
+                <div class="form-group">
+                    <label for="whEmail">Email:</label>
+                    <input type="email" id="whEmail">
+                </div>
+
+                <button type="submit" class="btn-primary">✅ Tạo kho</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Part Modal -->
+    <div id="partModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>📦 Thêm Loại Linh Kiện</h3>
+
+            <form id="partForm">
+                <div class="form-group">
+                    <label for="partName">Tên linh kiện:</label>
+                    <input type="text" id="partName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="partCategory">Danh mục:</label>
+                    <select id="partCategory" required>
+                        <option value="">-- Chọn danh mục --</option>
+                        <option value="Điện">Điện</option>
+                        <option value="Cơ khí">Cơ khí</option>
+                        <option value="Lạnh">Lạnh</option>
+                        <option value="Nước">Nước</option>
+                        <option value="Khác">Khác</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="partDescription">Mô tả:</label>
+                    <textarea id="partDescription" rows="2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="partBrand">Thương hiệu:</label>
+                    <input type="text" id="partBrand">
+                </div>
+
+                <div class="form-group">
+                    <label for="partModel">Model:</label>
+                    <input type="text" id="partModel">
+                </div>
+
+                <div class="form-group">
+                    <label for="partPrice">Giá cho thuê/ngày (VND):</label>
+                    <input type="number" id="partPrice" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="partDeposit">Tiền đặt cọc (VND):</label>
+                    <input type="number" id="partDeposit" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="partSpecs">Thông số kỹ thuật:</label>
+                    <textarea id="partSpecs" rows="2"></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">✅ Thêm linh kiện</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add to Inventory Modal -->
+    <div id="inventoryModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>📥 Thêm Linh Kiện Vào Kho</h3>
+
+            <form id="inventoryForm">
+                <div class="form-group">
+                    <label for="invWarehouse">Chọn kho:</label>
+                    <select id="invWarehouse" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="invPart">Chọn linh kiện:</label>
+                    <select id="invPart" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="invQuantity">Số lượng:</label>
+                    <input type="number" id="invQuantity" value="1" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="invLocation">Vị trí trong kho:</label>
+                    <input type="text" id="invLocation" placeholder="VD: Kệ A-12">
+                </div>
+
+                <button type="submit" class="btn-primary">✅ Thêm vào kho</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/warehouse-management.js"></script>
+</body>
+</html>
